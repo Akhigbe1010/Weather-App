@@ -39,6 +39,7 @@ let descriptionElement = document.querySelector("#description");
 let humidityElement = document.querySelector("#humidity");
 let windElement = document.querySelector("#wind");
 let dateElement = document.querySelector("#date");
+let iconElement = document.querySelector("#icon");
 
 temperatureElement.innerHTML = Math.round (response.data.main.temp);
 cityElement.innerHTML = response.data.name;
@@ -46,10 +47,15 @@ descriptionElement.innerHTML = response.data.weather[0].description;
 humidityElement.innerHTML = response.data.main.humidity;
 windElement.innerHTML = Math.round (response.data.wind.speed);
 dateElement.innerHTML = formatdate(response.data.dt * 1000 );
+iconElement.setAttribute("src",
+`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+iconElement.setAttribute;(
+    "alt", response.data.weather[0].description);
 }
 
 let apikey = "3f4f91f0ebfedb870f80d872256e48f7";
-let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apikey}&units=metric`;
+let city = "Berlin";
+let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
 
   //`https://api.shecodes.io/data/v1.weather?q=Berlin&appid={apikey}&units=metric`;
     //7b8f40fc3t572a5a95094307o7b10f4a
