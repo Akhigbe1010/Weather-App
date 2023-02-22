@@ -10,11 +10,22 @@
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css">
     <title>Weather App</title>
+
 </head>
 <body>
 <div class="container">
  <div class="Weather-App-wrapper">
   <div class="Weather-App">
+    <form id="search-form" class="mb-3">
+     <div class="row"> 
+        <div class="col-6">
+    <input type="search" placeholder="search city..." class="form-control" id="city-input"/>
+    </div>
+    <div class="col-1">
+    <input type="sumbit" value="search" class="btn btn-primary w-150"/>
+    </div>
+    </div> 
+    </form>
     <div class="overview">
    <h1 id="city"></h1>
     <ul>

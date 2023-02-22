@@ -32,7 +32,7 @@ function formatdate(timestamp) {
 
 
 function displayTemperature(response) {
-console.log(response.data);
+
 let temperatureElement = document.querySelector("#temperature");
 let cityElement = document.querySelector("#city");
 let descriptionElement = document.querySelector("#description");
@@ -52,6 +52,11 @@ iconElement.setAttribute("src",
 iconElement.setAttribute;(
     "alt", response.data.weather[0].description);
 }
+function search(event) {
+    event.preventDefault();
+    let citInputElement = document.querySelector("#city-input");
+    console.log(citInputElement.value);
+}
 
 let apikey = "3f4f91f0ebfedb870f80d872256e48f7";
 let city = "Berlin";
@@ -60,4 +65,8 @@ let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${a
   //`https://api.shecodes.io/data/v1.weather?q=Berlin&appid={apikey}&units=metric`;
     //7b8f40fc3t572a5a95094307o7b10f4a
 axios.get(apiUrl).then(displayTemperature);
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", search);
 
