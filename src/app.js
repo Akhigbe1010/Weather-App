@@ -41,6 +41,9 @@ let windElement = document.querySelector("#wind");
 let dateElement = document.querySelector("#date");
 let iconElement = document.querySelector("#icon");
 
+
+celsiusTemperature = response.data.main.temp;
+
 temperatureElement.innerHTML = Math.round (response.data.main.temp);
 cityElement.innerHTML = response.data.name;
 descriptionElement.innerHTML = response.data.weather[0].description;
@@ -52,21 +55,55 @@ iconElement.setAttribute("src",
 iconElement.setAttribute;(
     "alt", response.data.weather[0].description);
 }
-function search(event) {
+
+
+function search(city) {
+    let apikey = "3f4f91f0ebfedb870f80d872256e48f7";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
+    axios.get(apiUrl).then(displayTemperature);
+   
+}
+
+
+
+function handleSubmit(event) {
     event.preventDefault();
     let citInputElement = document.querySelector("#city-input");
+    search(citInputElement.value);
     console.log(citInputElement.value);
 }
 
-let apikey = "3f4f91f0ebfedb870f80d872256e48f7";
-let city = "Berlin";
-let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
-
-  //`https://api.shecodes.io/data/v1.weather?q=Berlin&appid={apikey}&units=metric`;
-    //7b8f40fc3t572a5a95094307o7b10f4a
-axios.get(apiUrl).then(displayTemperature);
 
 
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
 
+function displayfahrenheitTemeperature(event) {
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    let fahrenheitTemeperature = (celsiusTemperature * 9) / 5 + 32;
+    temperatureElement.innerHTML = Math.round(fahrenheitTemeperature);
+
+}
+function displaycelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+   let celsiusTemperature = null;
+
+    let form = document.querySelector("#search-form");
+    form.addEventListener("submit", handleSubmit);
+
+
+let celsiusLink = document.querySelector("#celsius-link");
+ celsiusLink.addEventListener("click", displaycelsiusTemperature);
+
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayfahrenheitTemeperature);
+
+ search("Berlin");
