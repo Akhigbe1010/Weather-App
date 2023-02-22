@@ -1,3 +1,36 @@
+function formatdate(timestamp) {
+   let date = new Date (timestamp);
+   let hours = date.getHours();
+     if (hours < 10) {
+       hours = `0${hours}`;
+     }
+
+   let mintues = date.getMinutes();
+   if (mintues < 10) {
+    mintues = `0${mintues}`;
+   }
+    if (mintues < 10) {
+      mintues = `0${mintues}`;
+    }
+
+
+   let days = [
+     "Sunday",
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday",
+     "Saturday",
+   ];
+   let day = days[date.getDay()];
+   return `${day} ${hours}:${mintues}`; 
+    
+
+}
+
+
+
 function displayTemperature(response) {
 console.log(response.data);
 let temperatureElement = document.querySelector("#temperature");
@@ -5,20 +38,20 @@ let cityElement = document.querySelector("#city");
 let descriptionElement = document.querySelector("#description");
 let humidityElement = document.querySelector("#humidity");
 let windElement = document.querySelector("#wind");
+let dateElement = document.querySelector("#date");
 
 temperatureElement.innerHTML = Math.round (response.data.main.temp);
 cityElement.innerHTML = response.data.name;
 descriptionElement.innerHTML = response.data.weather[0].description;
 humidityElement.innerHTML = response.data.main.humidity;
 windElement.innerHTML = Math.round (response.data.wind.speed);
-
+dateElement.innerHTML = formatdate(response.data.dt * 1000 );
 }
 
-let apikey = "7b8f40fc3t572a5a95094307o7b10f4a";
-let apiUrl = `https://api.shecodes.io/data/v1.weather?q=Berlin&appid={apikey}&units=metric`;
+let apikey = "3f4f91f0ebfedb870f80d872256e48f7";
+let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apikey}&units=metric`;
 
-//`https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${apikey}&units=metric`;
-
-
+  //`https://api.shecodes.io/data/v1.weather?q=Berlin&appid={apikey}&units=metric`;
+    //7b8f40fc3t572a5a95094307o7b10f4a
 axios.get(apiUrl).then(displayTemperature);
 
