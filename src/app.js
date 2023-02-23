@@ -9,9 +9,7 @@ function formatdate(timestamp) {
    if (mintues < 10) {
     mintues = `0${mintues}`;
    }
-    if (mintues < 10) {
-      mintues = `0${mintues}`;
-    }
+   
 
 
    let days = [
