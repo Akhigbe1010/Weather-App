@@ -1,17 +1,13 @@
 function formatdate(timestamp) {
    let date = new Date (timestamp);
    let hours = date.getHours();
-     if (hours < 10) {
-       hours = `0${hours}`;
+    if (hours < 10) {
+    hours = `0${hours}`;
      }
-
    let mintues = date.getMinutes();
    if (mintues < 10) {
     mintues = `0${mintues}`;
    }
-   
-
-
    let days = [
      "Sunday",
      "Monday",
@@ -23,14 +19,39 @@ function formatdate(timestamp) {
    ];
    let day = days[date.getDay()];
    return `${day} ${hours}:${mintues}`; 
-    
+}
 
+function displayForecast() {
+  forecastElement = document.querySelector("#forecast");
+
+
+let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
+let forecastHTML = `<div class="row">`;
+days.forEach(function(day) {
+
+  forecastHTML = forecastHTML +
+    `
+  
+            <div class="col-2"> 
+             <div class="weather-forecast-date">${day}</div>
+            <img src="https://openweathermap.org/img/wn/01d@2x.png"
+            alt="" width="42" 
+            />
+            <div class="weather-forecast-temperature">
+                <span class="weather-forecast-temperature-max">18°</span>
+                 <span class="weather-forecast-temperature-min">12°</span>
+            </div>
+        </div>   
+ `;
+}) 
+ forecastHTML = forecastHTML + `</div>`;
+forecastElement.innerHTML = forecastHTML;
+console.log(forecastHTML);
 }
 
 
-
 function displayTemperature(response) {
-
 let temperatureElement = document.querySelector("#temperature");
 let cityElement = document.querySelector("#city");
 let descriptionElement = document.querySelector("#description");
@@ -93,8 +114,9 @@ function displaycelsiusTemperature(event) {
 
    let celsiusTemperature = null;
 
-    let form = document.querySelector("#search-form");
-    form.addEventListener("submit", handleSubmit);
+    
+  let form = document.querySelector("#search-form");
+  form.addEventListener("submit", handleSubmit);
 
 
 let celsiusLink = document.querySelector("#celsius-link");
@@ -104,4 +126,5 @@ let celsiusLink = document.querySelector("#celsius-link");
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayfahrenheitTemeperature);
 
- search("Berlin");
+search("Berlin");
+displayForecast();
