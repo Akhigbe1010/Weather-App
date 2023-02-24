@@ -103,7 +103,7 @@ iconElement.setAttribute;(
 
 function search(city) {
     let apikey = "5da7b2dc058f07286fea39c4cee516a3";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?${city}&appid=${apikey}&units=metric`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon={lon}&lat={lat}&key={key}`;
     //`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;//
     axios.get(apiUrl).then(displayTemperature);
    
