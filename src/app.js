@@ -26,11 +26,8 @@ let date = new Date(timestamp * 1000);
 let day = date.getDay();
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-return day;
+return days[day];
      }
-
-
-
 
 function displayForecast(response) {
    let forecast = (response.data.daily);
@@ -40,24 +37,31 @@ function displayForecast(response) {
 let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
 
 let forecastHTML = `<div class="row">`;
-days.forEach(function (forecastDay) {
-  forecastHTML =
-    forecastHTML +
-    `
+days.forEach(function (forecastDay, index) {
+  if (index < 6) {
+    forecastHTML =
+      forecastHTML +
+      `
   
             <div class="col-2"> 
-             <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
-            <img src="https://openweathermap.org/img/wn/01d ${forecast.weather[0].icon}@2x.png"
+             <div class="weather-forecast-date">${formatDay(
+               forecastDay.dt
+             )}</div>
+           
+            <img src="https://openweathermap.org/img/wn/01d ${
+              forecast.weather[0].icon
+            }@2x.png"
             alt="" width="42" 
             />
             <div class="weather-forecast-temperature">
                 <span class="weather-forecast-temperature-max">
-                ${forecastDay.temp.max}°</span>
+                ${Math.round(forecastDay.temp.max)}°</span>
                  <span class="weather-forecast-temperature-min">
-                 ${forecastDay.temp.min}°</span>
+                 ${Math.round(forecastDay.temp.min)}°</span>
             </div>
         </div>   
  `;
+  }
 }); 
  forecastHTML = forecastHTML + `</div>`;
 forecastElement.innerHTML = forecastHTML;
@@ -66,10 +70,9 @@ forecastElement.innerHTML = forecastHTML;
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apikey = "5da7b2dc058f07286fea39c4cee516a3";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apikey}&&units=metric`;
-   //`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apikey}&units=metric`;//
-  console.log(apiUrl);
+  let apikey = "5743bee57fddbfaf52447193a87d5dd25";
+
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${coordinates.lat}&lon=${coordinates.lon}&appid=${apikey}&&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -102,8 +105,8 @@ iconElement.setAttribute;(
 
 
 function search(city) {
-    let apikey = "5da7b2dc058f07286fea39c4cee516a3";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?${city}&appid=${apikey}&units=metric`;
+    let apikey = "743bee57fddbfaf52447193a87d5dd25";
+   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apikey}&units=imperial`;
     //`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;//
     axios.get(apiUrl).then(displayTemperature);
    
@@ -116,41 +119,10 @@ function handleSubmit(event) {
     let citInputElement = document.querySelector("#city-input");
     search(citInputElement.value);
     
-}
-
-
-
-
-function displayfahrenheitTemeperature(event) {
-    event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
-    celsiusLink.classList.remove("active");
-    fahrenheitLink.classList.add("active");
-    let fahrenheitTemeperature = (celsiusTemperature * 9) / 5 + 32;
-    temperatureElement.innerHTML = Math.round(fahrenheitTemeperature);
-
-}
-function displaycelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-   let celsiusTemperature = null;
-
-    
+} 
   let form = document.querySelector("#search-form");
   form.addEventListener("submit", handleSubmit);
 
-
-let celsiusLink = document.querySelector("#celsius-link");
- celsiusLink.addEventListener("click", displaycelsiusTemperature);
-
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayfahrenheitTemeperature);
 
 search("Berlin");
 
