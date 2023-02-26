@@ -24,7 +24,7 @@ function formatDate(timestamp) {
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
-  let day = data.getDay();
+  let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return days[day];
@@ -67,7 +67,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apikey = "ef45dbb5226daf4a30b508c33ota60fe";
+  let apikey = "fbef01f4et1b02o0d25c27210a43ef3f";
 
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apikey}`;
   axios.get(apiUrl).then(displayForecast);
@@ -101,7 +101,7 @@ function displayTemperature(response) {
 }
 
 function search(city) {
-  let apikey = "ef45dbb5226daf4a30b508c33ota60fe";
+  let apikey = "fbef01f4et1b02o0d25c27210a43ef3f";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apikey}&units=metric`;
   //`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;//
   axios.get(apiUrl).then(displayTemperature);

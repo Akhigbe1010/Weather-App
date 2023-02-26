@@ -63,8 +63,8 @@ li::first-letter{
     line-height: 1;
     font-weight: 800;
     position: absolute;
-    top: -50px;
-    left: 350px;
+    top: -20px;
+    left: 160px;
     width: 200px;
      /* censius position*/
 }
@@ -72,11 +72,14 @@ li::first-letter{
 .weather-temperature .units{
     position: absolute;
     font-size: 30px;
-    top: -48px;
-    left: 399px;
+    top: -28px;
+    left: 260px;
     width: 200px;
      /* censius position*/
 }
+
+
+
 .weather-temperature .active {
      color: #fff;
      cursor: default;
